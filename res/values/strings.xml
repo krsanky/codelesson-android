@@ -13,4 +13,18 @@
     <string name="about_text">about...</string>
     <string name="about_title">title...</string>
 
+    <string name="settings_label">settings_label...</string>
+    <string name="settings_shortcut">settings_shortcut...</string>
+
+
+
+
+    <string name="music_title">music_title...</string>
+    <string name="music_summary">music_summary...</string>
+
+    <string name="hints_title">hints_title...</string>
+    <string name="hints_summary">hints_summary...</string>
+    
+    <string name="prefs_title">prefs_title...</string>
+                        
 </resources>
