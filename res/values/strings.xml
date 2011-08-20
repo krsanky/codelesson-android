@@ -3,12 +3,14 @@
     <string name="hello">Buttons!</string>
     <string name="app_name">Sudoku</string>
 
-
     <string name="main_title">Sudoku</string>
+
     <string name="continue_label">Continue ?</string>
     <string name="new_game_label">New Garden Gnome</string>
     <string name="about_label">About this thing...</string>
     <string name="exit_label">No Exit</string>
 
+    <string name="about_text">about...</string>
+    <string name="about_title">title...</string>
 
 </resources>

@@ -1,21 +1,53 @@
 package org.paul.sudoku;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 
-public class Sudoku extends Activity {
-
+//public class Sudoku extends Activity {
+public class Sudoku extends Activity implements OnClickListener {
+    	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        TextView tv = new TextView(this);
-        tv.setText("If you hold a cat by the tail you learn things you cannot learn any other way.");
-        setContentView(tv);
-         */
         
         setContentView(R.layout.main);    
-    
+
+        // Set up click listeners for all the buttons
+        View continueButton = findViewById(R.id.continue_button);
+        //continueButton.setOnClickListener(this);
+
+        View newButton = findViewById(R.id.new_button);
+        //newButton.setOnClickListener(this);
+
+        View aboutButton = findViewById(R.id.about_button);
+        aboutButton.setOnClickListener(this);
+
+        View exitButton = findViewById(R.id.exit_button);
+        //exitButton.setOnClickListener(this);
+        
     }
+    
+    
+
+
+
+    public void onClick(View v) {
+    	switch (v.getId()) {
+
+    	case R.id.about_button:
+           Intent i = new Intent(this, About.class);
+           startActivity(i);
+           break;
+
+           // Add the remaining buttons ...
+    	}
+
+    }
+
+
 }
+
