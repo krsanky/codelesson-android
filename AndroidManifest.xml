@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="org.paul.sudoku"
       android:versionCode="1"
@@ -29,6 +30,8 @@
         </activity>
 
 
-
+        <activity android:name=".Game">
+        </activity>
+        
     </application>
 </manifest>
