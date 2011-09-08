@@ -1,8 +1,11 @@
 package org.paul.sudoku;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 public class Game extends Activity {
 	private static final String TAG = "Sudoku";
@@ -153,12 +156,9 @@ public class Game extends Activity {
 	private void calculateUsedTiles(){
 		for(int x=0; x<9; x++){
 			for(int y=0; y<9; y++){
-				Log.d(TAG, "pre calc-used-tiles... (from no-arg helper )");
+				//Log.d(TAG, "pre calc-used-tiles... (from no-arg helper )");
 				used[x][y] = calculateUsedTiles(x,y);
-
-	            Log.d(TAG, "used[" + x + "][" + y + "] = " + toPuzzleString(used[x][y]));
-
-			
+	            //Log.d(TAG, "used[" + x + "][" + y + "] = " + toPuzzleString(used[x][y]));
 			}
 		}
 	}
@@ -177,5 +177,18 @@ public class Game extends Activity {
 		return true;
 	}
 
+	protected void showKeypadOrError(int x, int y) {
+		int tiles[] = getUsedTiles(x, y);
+		if (tiles.length == 9) {
+			Toast toast = Toast.makeText(this, R.string.no_moves_label, Toast.LENGTH_SHORT);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+		} else {
+			Log.d(TAG, "showKeypad: used=" + toPuzzleString(tiles));
+			Dialog v = new Keypad(this, tiles, puzzleView);
+			v.show();
+		}
+	}
+	
 	
 }
