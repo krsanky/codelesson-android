@@ -4,7 +4,10 @@
       package="org.paul.sudoku"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="8" />
+      <!-- android:debuggable -->
+      
+
+    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name"
                  android:debuggable="true" >
@@ -26,12 +29,13 @@
         </activity>
 
         <activity android:name=".Prefs" 
-                  android:label="@string/prefs_title" >
+                  android:label="@string/settings_title" >
         </activity>
 
 
-        <activity android:name=".Game">
-        </activity>
+        <activity android:name=".Game"
+                  android:label="@string/game_title"/>
+
         
     </application>
 </manifest>

@@ -1,9 +1,12 @@
 package org.paul.sudoku;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 
 public class Game extends Activity {
-
+	private static final String TAG = "Sudoku";
+	
 	public static final String KEY_DIFFICULTY = "org.paul.sudoku.difficulty";
 	public static final int DIFFICULTY_EASY = 0;
 	public static final int DIFFICULTY_MEDIUM = 1;
@@ -11,6 +14,7 @@ public class Game extends Activity {
 
 
 	private int puzzle[];
+	private PuzzleView puzzleView;
 	
 	private final String easyPuzzle = "360000000004230800000004200" +
 								      "070460003820000014500013020" +
@@ -23,6 +27,22 @@ public class Game extends Activity {
 			 					      "000720903090301080000000600";
 	
 	private final int used[][][] = new int[9][9][];
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Log.d(TAG, "onCreate");
+
+		int diff = getIntent().getIntExtra(KEY_DIFFICULTY, DIFFICULTY_EASY);
+		puzzle = getPuzzle(diff);
+		Log.d(TAG, "pre calc-used-tiles...");
+		calculateUsedTiles();
+
+		puzzleView = new PuzzleView(this);
+		setContentView(puzzleView);
+		puzzleView.requestFocus();
+	}
+	// ...
 	
 	private int[] getPuzzle(int diff) {
 		String puz;
@@ -48,7 +68,7 @@ public class Game extends Activity {
 	static protected int[] fromPuzzleString(String string){
 		int[] puz_ = new int[string.length()];
 		for(int i=0; i<puz_.length; i++){
-			puz_[i] = string.charAt(i) - 'O';
+			puz_[i] = string.charAt(i) - '0';
 		}
 		return puz_;
 	}
@@ -133,9 +153,12 @@ public class Game extends Activity {
 	private void calculateUsedTiles(){
 		for(int x=0; x<9; x++){
 			for(int y=0; y<9; y++){
+				Log.d(TAG, "pre calc-used-tiles... (from no-arg helper )");
 				used[x][y] = calculateUsedTiles(x,y);
-				//...
-				//...
+
+	            Log.d(TAG, "used[" + x + "][" + y + "] = " + toPuzzleString(used[x][y]));
+
+			
 			}
 		}
 	}

@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-//public class Sudoku extends Activity {
 public class Sudoku extends Activity implements OnClickListener {
-    	
+	private static final String TAG = "Sudoku";
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,20 +77,24 @@ public class Sudoku extends Activity implements OnClickListener {
     	return true;
     }
     
-    private static final String TAG = "Sudoku";
     private void openNewGameDialog() {
     	new AlertDialog.Builder(this)
         					.setTitle(R.string.new_game_title)
         					.setItems(R.array.difficulty,
-        new DialogInterface.OnClickListener() {
-        						public void onClick(DialogInterface dialoginterface, int i) {
+                                new DialogInterface.OnClickListener() {
+        						  public void onClick(DialogInterface dialoginterface, int i) {
         							startGame(i);
-        						}
-        					}).show();
+        						  }
+        					    }).show();
     }
+ 
+
+    /** Start a new game with the given difficulty level */
     private void startGame(int i) {
-        Log.d(TAG, "clicked on " + i); // Start game here...
+       Log.d(TAG, "clicked on " + i);
+       Intent intent = new Intent(this, Game.class);
+       intent.putExtra(Game.KEY_DIFFICULTY, i);
+       startActivity(intent);
     }
-    
 }
 
