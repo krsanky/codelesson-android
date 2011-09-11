@@ -4,3 +4,4 @@ gen/
 bin/
 .project
 .classpath
+tmp/
