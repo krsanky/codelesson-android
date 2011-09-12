@@ -10,9 +10,13 @@ public class Music {
 	/* Stop old song and start new one */
 	public static void play(Context context, int resource) {
 		stop(context);
-		mp = MediaPlayer.create(context, resource);
-		mp.setLooping(true);
-		mp.start();
+		
+		if (Prefs.getMusic(context)) {
+			mp = MediaPlayer.create(context, resource);
+			mp.setLooping(true);
+			mp.start();
+		}
+		
 	}
 	
 	/* Stop the music */

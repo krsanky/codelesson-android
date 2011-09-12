@@ -11,9 +11,13 @@ public class Game extends Activity {
 	private static final String TAG = "Sudoku";
 	
 	public static final String KEY_DIFFICULTY = "org.paul.sudoku.difficulty";
-	public static final int DIFFICULTY_EASY = 0;
-	public static final int DIFFICULTY_MEDIUM = 1;
-	public static final int DIFFICULTY_HARD = 2;
+
+	public static final int DIFFICULTY_EASY =       0;
+	public static final int DIFFICULTY_MEDIUM =     1;
+	public static final int DIFFICULTY_HARD =       2;
+	public static final int DIFFICULTY_CONTINUE =  3;
+	
+	private static final String PREF_PUZZLE = "puzzle-";
 
 
 	private int puzzle[];
@@ -44,10 +48,12 @@ public class Game extends Activity {
 		puzzleView = new PuzzleView(this);
 		setContentView(puzzleView);
 		puzzleView.requestFocus();
+	
+		//If the activity is restarted, do a continue next time
+		getIntent().putExtra(KEY_DIFFICULTY, DIFFICULTY_CONTINUE);
 	}
 	
 	
-	    
     @Override
     protected void onResume() {
  	   super.onResume();
@@ -56,7 +62,13 @@ public class Game extends Activity {
     @Override
     protected void onPause() {
  	   super.onPause();
+ 	   Log.d(TAG, "onPause");
+
  	   Music.stop(this);
+
+ 	   // Save the current puzzle
+ 	   getPreferences(MODE_PRIVATE).edit().putString(PREF_PUZZLE, toPuzzleString(puzzle)).commit();
+
     }
 
 	
@@ -64,13 +76,19 @@ public class Game extends Activity {
 		String puz;
 		// TODO: Continue last game
 		switch (diff) {
+
 		case DIFFICULTY_HARD:
 			puz = hardPuzzle;
 			break;
 		case DIFFICULTY_MEDIUM:
 			puz = mediumPuzzle;
 			break;
-		case DIFFICULTY_EASY:
+
+		case DIFFICULTY_CONTINUE:
+			puz = getPreferences(MODE_PRIVATE).getString(PREF_PUZZLE, easyPuzzle);
+			break;
+
+		case DIFFICULTY_EASY:		
 		default:
 			puz = easyPuzzle;
 			break;
