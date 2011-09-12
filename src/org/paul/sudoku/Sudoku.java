@@ -36,6 +36,20 @@ public class Sudoku extends Activity implements OnClickListener {
         exitButton.setOnClickListener(this);
         
     }
+
+    
+    @Override
+    protected void onResume() {
+ 	   super.onResume();
+ 	   Music.play(this, R.raw.moonlight_movement1);
+    }
+    @Override
+    protected void onPause() {
+ 	   super.onPause();
+ 	   Music.stop(this);
+    }
+
+    
     
     //@Override ????? 
     public void onClick(View v) {

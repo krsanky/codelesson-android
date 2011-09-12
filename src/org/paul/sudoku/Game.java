@@ -45,7 +45,20 @@ public class Game extends Activity {
 		setContentView(puzzleView);
 		puzzleView.requestFocus();
 	}
-	// ...
+	
+	
+	    
+    @Override
+    protected void onResume() {
+ 	   super.onResume();
+ 	   Music.play(this, R.raw.moonlight_movement1);
+    }
+    @Override
+    protected void onPause() {
+ 	   super.onPause();
+ 	   Music.stop(this);
+    }
+
 	
 	private int[] getPuzzle(int diff) {
 		String puz;
